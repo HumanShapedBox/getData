@@ -27,9 +27,28 @@ public class CheckData {
         }
     }
 
-    public String[] checkedData(){
-        String[] userData= new String[5];
-        return userData;
+    public String getSurname(){
+        return this.surname;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public String getMiddleName(){
+        return this.middleName;
+    }
+
+    public String getBirthDate(){
+        return this.birthDate;
+    }
+
+    public int getPhoneNumber(){
+        return this.phoneNumber;
+    }
+
+    public char getSex(){
+        return this.sex;
     }
 
     private String[] spliter(String data){
