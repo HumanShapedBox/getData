@@ -17,20 +17,9 @@ public class CheckData {
             whatsWrong(data);
         }else{
             fillTextData(data);
+            fillNumber(data);
         }
     }
-
-    private void fillTextData(String data){
-        String[] user = spliter(data);
-        try{
-            surname = checkTextData(user[0]);
-            name = checkTextData(user[1]);
-            middleName = checkTextData(user[2]);
-        }catch (RuntimeException e){
-            System.out.println(e);
-        }
-    }
-
 
     private String[] spliter(String data){
         String[] splitData = data.split(" ");
@@ -61,6 +50,32 @@ public class CheckData {
         return data;
     }
 
+    private void checkNumber(String data){
+        try{
+            phoneNumber = Integer.parseInt(data);
+        }catch(NumberFormatException e){
+            System.out.println("Некорректный ввод номера");
+        }
+    }
 
+    private void fillTextData(String data){
+        String[] user = spliter(data);
+        try{
+            surname = checkTextData(user[0]);
+            name = checkTextData(user[1]);
+            middleName = checkTextData(user[2]);
+        }catch (RuntimeException e){
+            System.out.println(e);
+        }
+    }
+
+    private void fillNumber(String data){
+        String[] user = spliter(data);
+        try{
+            checkNumber(user[4]);
+        }catch (RuntimeException e){
+            System.out.println(e);
+        }
+    }
 
 }
