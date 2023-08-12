@@ -3,7 +3,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.StringTokenizer;
 
 public class CheckData {
 
@@ -64,22 +63,21 @@ public class CheckData {
         }
     }
 
-    private String checkDateData(String data){
+    private void checkDateData(String data){
         if(data.isEmpty())
             throw new RuntimeException("Неверный формат даты");
         String[] date = data.split(".");
         if(date.length > 3)
             throw new RuntimeException("Неверный формат даты");
-        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
         try{
-            Date userDate = formatter.parse(data);
-            Date currentDate = formatter.parse(LocalDate.now().toString());
-            if(userDate.compareTo(currentDate) < 0)
+            DateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            Date userDate = format.parse(data);
+            int currentYear = LocalDate.now().getYear();
+            if(userDate.getYear() > currentYear)
                 throw new RuntimeException("Неверный формат даты");
         }catch (ParseException e){
             System.out.println("Неверный формат даты");
         }
-        return data;
     }
 
     private void fillTextData(String data){
