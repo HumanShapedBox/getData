@@ -3,16 +3,34 @@ import java.util.StringTokenizer;
 public class CheckData {
 
     private final int counter = 6;
+    private String surname;
+    private String name;
+    private String middleName;
+    private String birthDate;
+    private int phoneNumber;
+    private char sex;
+
 
 
     public void checkMyData(String data){
-
-        if(checkString(data)){
-            System.out.println(data);
-        }else {
+        if(!checkString(data)){
             whatsWrong(data);
+        }else{
+            fillTextData(data);
         }
     }
+
+    private void fillTextData(String data){
+        String[] user = spliter(data);
+        try{
+            surname = checkTextData(user[0]);
+            name = checkTextData(user[1]);
+            middleName = checkTextData(user[2]);
+        }catch (RuntimeException e){
+            System.out.println(e);
+        }
+    }
+
 
     private String[] spliter(String data){
         String[] splitData = data.split(" ");
@@ -36,6 +54,13 @@ public class CheckData {
             System.out.println("Данных недостаточно");
         }
     }
+
+    private String checkTextData(String data){
+        if(data.isEmpty() || data.matches("^[0-9]*$"))
+            throw new RuntimeException("Некорректный ввод");
+        return data;
+    }
+
 
 
 }
