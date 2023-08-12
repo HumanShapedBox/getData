@@ -1,3 +1,8 @@
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 public class CheckData {
@@ -18,6 +23,7 @@ public class CheckData {
         }else{
             fillTextData(data);
             fillNumber(data);
+            fillDate(data);
         }
     }
 
@@ -58,6 +64,24 @@ public class CheckData {
         }
     }
 
+    private String checkDateData(String data){
+        if(data.isEmpty())
+            throw new RuntimeException("Неверный формат даты");
+        String[] date = data.split(".");
+        if(date.length > 3)
+            throw new RuntimeException("Неверный формат даты");
+        DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
+        try{
+            Date userDate = formatter.parse(data);
+            Date currentDate = formatter.parse(LocalDate.now().toString());
+            if(userDate.compareTo(currentDate) < 0)
+                throw new RuntimeException("Неверный формат даты");
+        }catch (ParseException e){
+            System.out.println("Неверный формат даты");
+        }
+        return data;
+    }
+
     private void fillTextData(String data){
         String[] user = spliter(data);
         try{
@@ -77,5 +101,15 @@ public class CheckData {
             System.out.println(e);
         }
     }
+
+    private void fillDate(String data){
+        String[] user = spliter(data);
+        try{
+            checkDateData(user[3]);
+        }catch (RuntimeException e){
+            System.out.println(e);
+        }
+    }
+
 
 }
