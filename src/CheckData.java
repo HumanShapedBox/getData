@@ -27,6 +27,11 @@ public class CheckData {
         }
     }
 
+    public String[] checkedData(){
+        String[] userData= new String[5];
+        return userData;
+    }
+
     private String[] spliter(String data){
         String[] splitData = data.split(" ");
         return splitData;
@@ -84,7 +89,6 @@ public class CheckData {
     private char checkSex(String data){
         if(data.isEmpty() || data.matches("^[0-9]*$"))
             throw new RuntimeException("Некорректный ввод");
-//        Character userSex = data.charAt(0);
         if(data.equals("f") || data.equals("m")) {
             return data.charAt(0);
         }else throw new RuntimeException("Некорректный ввод");
@@ -104,7 +108,6 @@ public class CheckData {
         String[] user = spliter(data);
         try{
             checkNumber(user[4]);
-            phoneNumber = Integer.parseInt(user[4]);
         }catch (RuntimeException e){
             System.out.println(e);
         }
