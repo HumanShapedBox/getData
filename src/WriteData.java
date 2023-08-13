@@ -8,7 +8,6 @@ import java.util.List;
 public class WriteData {
 
     String name;
-    List<String> files = new ArrayList<>();
 
     public WriteData(){
         this.name = null;
@@ -19,8 +18,7 @@ public class WriteData {
     }
 
     public void writeData(List<String> data){
-
-        File file = new File("path/%s", name);
+        File file = new File("C://%s", name);
 
         try (FileWriter fw = new FileWriter(file);
              BufferedWriter bw = new BufferedWriter(fw))
@@ -35,10 +33,4 @@ public class WriteData {
         }
 
     }
-
-    private void addFileName(List<String> data){
-        files.add(data.get(0));
-    }
-
-
 }
