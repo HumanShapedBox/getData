@@ -2,19 +2,29 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-public class CheckData {
+public class CheckedData {
 
     private final int counter = 6;
     private String surname;
     private String name;
     private String middleName;
     private String birthDate;
-    private int phoneNumber;
+    private long phoneNumber;
     private char sex;
 
 
+    public CheckedData(){
+        this.surname = null;
+        this.name = null;
+        this.middleName = null;
+        this.birthDate = null;
+        this.phoneNumber = 0;
+        this.sex = 0;
+    }
 
     public void checkMyData(String data){
         if(!checkString(data)){
@@ -27,28 +37,19 @@ public class CheckData {
         }
     }
 
+    public List<String> newUser(){
+        List<String> addUser = new ArrayList<>();
+        addUser.add(this.surname);
+        addUser.add(this.name);
+        addUser.add(this.middleName);
+        addUser.add(this.birthDate);
+        addUser.add(Long.toString(this.phoneNumber));
+        addUser.add(Character.toString(this.sex));
+        return addUser;
+    }
+
     public String getSurname(){
         return this.surname;
-    }
-
-    public String getName(){
-        return this.name;
-    }
-
-    public String getMiddleName(){
-        return this.middleName;
-    }
-
-    public String getBirthDate(){
-        return this.birthDate;
-    }
-
-    public int getPhoneNumber(){
-        return this.phoneNumber;
-    }
-
-    public char getSex(){
-        return this.sex;
     }
 
     private String[] spliter(String data){
@@ -81,8 +82,9 @@ public class CheckData {
     }
 
     private void checkNumber(String data){
+        if(data.length() < 10) throw new RuntimeException("Некорректный ввод номера");
         try{
-            phoneNumber = Integer.parseInt(data);
+            phoneNumber = Long.parseLong(data);
         }catch(NumberFormatException e){
             System.out.println("Некорректный ввод номера");
         }
