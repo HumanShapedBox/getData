@@ -48,10 +48,6 @@ public class CheckedData {
         return addUser;
     }
 
-    public String getSurname(){
-        return this.surname;
-    }
-
     private String[] spliter(String data){
         String[] splitData = data.split(" ");
         return splitData;

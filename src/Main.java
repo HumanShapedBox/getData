@@ -4,6 +4,6 @@ public class Main {
 
         Controller user = new Controller();
         user.newUser();
-
+        user.writeData();
     }
 }
